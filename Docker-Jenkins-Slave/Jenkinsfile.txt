@@ -1,0 +1,30 @@
+node ("Docker"){
+	stage ("SCM"){
+		checkout scm
+		}
+	
+	stage ("prep") {
+		sh ("Env")
+	}
+	
+	stage ("build docker") {
+		image_docker = docker.build ("my-image:${env.BUILD_ID","Docker")
+	
+	}
+	
+	stage ("push docker") {
+		docker.withRegistry('http://mydockerregisrty.com:6100:docker','my_cred')
+		image_docker.push("docker")
+	}
+	
+	stage ("build latest") {
+		image_latest=build.docker("http://mydockerregisrty.com:6100:latest")
+	
+	}
+	
+	stage ("push latest") {
+		docker.withRegistry('http://mydockerregisrty.com:6100','my_cred')
+		image_latest.push("latest")
+	
+	}
+	
