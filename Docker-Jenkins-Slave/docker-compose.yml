@@ -1,0 +1,11 @@
+version: '2'
+services:
+	docker:
+		build: /opt/docker
+		image: http://mydockerregisrty.com:6100:docker
+	
+	slave:
+		build: .
+		image: http://mydockerregisrty.com:6100:latest
+		depends_on:
+			- docker
